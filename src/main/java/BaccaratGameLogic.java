@@ -40,7 +40,7 @@ public class BaccaratGameLogic {
             return false;
         }
         //If player did not draw a card if the total is less than 6 return true otherwise return false
-        if(playerCard == NULL){
+        if(playerCard == null){
             if(bankerSum<6){
                 return true;
             }
