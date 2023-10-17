@@ -6,9 +6,14 @@ public class BaccaratGameLogic {
 
     }
 
-    public String whoWon(ArrayList<Card> hand1, ArrayList<Card> hand2){
-
-        return null;
+    public String whoWon(ArrayList<Card> dealer, ArrayList<Card> player){
+        //evaluate which hand is closer to a total of 9 and return who won
+        if ((handTotal(dealer) -9) < (handTotal(player)-9)){
+            return "Dealer won";
+        }else if((handTotal(dealer) -9) > (handTotal(player)-9)){
+            return "Player won";
+        }
+        return "Draw";
     }
 
     //
@@ -26,6 +31,7 @@ public class BaccaratGameLogic {
     }
 
     public boolean evaluateBankerDraw(ArrayList<Card> hand, Card playerCard){
+        /*Get the total of the dealers hand if the total is 2 or less return true. If it is 7 or more return false*/
         int bankerSum = handTotal(hand);
         if(bankerSum <= 2){
             return true;
@@ -33,55 +39,62 @@ public class BaccaratGameLogic {
         else if (bankerSum >= 7) {
             return false;
         }
-
+        //If player did not draw a card if the total is less than 6 return true otherwise return false
+        if(playerCard == NULL){
+            if(bankerSum<6){
+                return true;
+            }
+            return false;
+        }
+        //Get the value of the players third card and use it to determine whether the dealer draws or not
         switch(playerCard.getValue()){
             case 1:
-                if(handTotal(hand)<4){
+                if(bankerSum<4){
                     return true;
                 }
                 return false;
             case 2:
-                if(handTotal(hand)<5){
+                if(bankerSum<5){
                     return true;
                 }
                 return false;
             case 3:
-                if(handTotal(hand)<5){
+                if(bankerSum<5){
                     return true;
                 }
                 return false;
             case 4:
-                if(handTotal(hand)<6){
+                if(bankerSum<6){
                     return true;
                 }
                 return false;
             case 5:
-                if(handTotal(hand)<6){
+                if(bankerSum<6){
                     return true;
                 }
                 return false;
             case 6:
-                if(handTotal(hand)<7){
+                if(bankerSum<7){
                     return true;
                 }
                 return false;
             case 7:
-                if(handTotal(hand)<7){
+                if(bankerSum<7){
                     return true;
                 }
                 return false;
             case 8:
-                if(handTotal(hand)<3){
+                if(bankerSum<3){
                     return true;
                 }
                 return false;
             case 9:
-                if(handTotal(hand)<4){
+                if(bankerSum<4){
                     return true;
                 }
                 return false;
             default:
-                if(handTotal(hand)<4){
+                if(bankerSum<4){
                     return true;
                 }
                 return false;
@@ -89,6 +102,7 @@ public class BaccaratGameLogic {
     }
 
     public boolean evaluatePlayerDraw(ArrayList<Card> hand){
+        //If the players total is less than 6 they draw a card
         if(handTotal(hand) < 6){
             return true;
         }
