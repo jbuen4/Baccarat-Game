@@ -43,7 +43,6 @@ public class BaccaratDealer {
         ArrayList<Card> hand = new ArrayList<>(2);
         hand.add(drawOne());
         hand.add(drawOne());
-        sizeOfDeck = sizeOfDeck - 2;
         return hand;
     }
 
@@ -53,6 +52,7 @@ public class BaccaratDealer {
     public Card drawOne(){
         Card draw = deck.get(0);
         deck.remove(0);
+        sizeOfDeck--;
         return draw;
     }
 
