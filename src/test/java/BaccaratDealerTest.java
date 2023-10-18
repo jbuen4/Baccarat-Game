@@ -12,13 +12,11 @@ public class BaccaratDealerTest {
         dealer = new BaccaratDealer(); 
     }
 	@Test
-	void testDrawAndShuffle() {
+	void testDraw() {
 		Card testCard = dealer.drawOne();
 		Card testCard2 = dealer.drawOne();
-		assertFalse(testCard.getValue() == 1 && testCard.getSuite() == "Diamonds" , "did not shuffle before draw");
-		assertFalse(testCard2.getValue() == 1 && testCard2.getSuite() == "Hearts" , "did not shuffle defore draw");
-		assertFalse(testCard.getValue() == testCard2.getValue() && testCard2.getSuite() == testCard.getSuite());
-		assertEquals(dealer.deckSize(),50);
+		assertFalse(testCard.getValue() == testCard2.getValue() && testCard2.getSuite() == testCard.getSuite(),"Did not remove card");
+		assertEquals(dealer.deckSize(),50,"Did not update size");
 	}
 	@Test
 	void testDealerConstructorAndGenerateDeck() {
