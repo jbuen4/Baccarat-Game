@@ -69,4 +69,6 @@ public class BaccaratDealer {
     public int deckSize(){
         return sizeOfDeck;
     }
+
+    public ArrayList<Card> getDeck() {return deck;}
 }

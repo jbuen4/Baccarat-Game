@@ -13,6 +13,9 @@ public class BaccaratGameLogic {
         }else if((handTotal(dealer) -9) > (handTotal(player)-9)){
             return "Player won";
         }
+
+
+
         return "Draw";
     }
 
@@ -25,11 +28,20 @@ public class BaccaratGameLogic {
     public int handTotal(ArrayList<Card> hand){
 
         int cardOne = hand.get(0).getValue();
+        if(cardOne > 9)
+            cardOne = 0;
+
         int cardTwo = hand.get(1).getValue();
+        if(cardTwo > 9)
+            cardTwo = 0;
+
         int sum = (cardTwo + cardOne) % 10;
         return sum;
     }
 
+    //
+    // Returns true if the banker draws an extra cards based on certain situations
+    //
     public boolean evaluateBankerDraw(ArrayList<Card> hand, Card playerCard){
         /*Get the total of the dealers hand if the total is 2 or less return true. If it is 7 or more return false*/
         int bankerSum = handTotal(hand);
@@ -101,11 +113,9 @@ public class BaccaratGameLogic {
         }
     }
 
+    // returns true f the players total is less than 6, false otherwise
     public boolean evaluatePlayerDraw(ArrayList<Card> hand){
-        //If the players total is less than 6 they draw a card
-        if(handTotal(hand) < 6){
-            return true;
-        }
-        return false;
+        int total = handTotal(hand);
+        return total < 6;
     }
 }
