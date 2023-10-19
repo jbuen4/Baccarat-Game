@@ -275,4 +275,49 @@ public class BaccaratGameLogicTest {
         hand.add(b2);
         assertFalse(b.evaluatePlayerDraw(hand), "evaluate player hand is true");
     }
+    @Test
+    void whoWonTestOne() {
+    	BaccaratGameLogic b = new BaccaratGameLogic();
+    	ArrayList<Card> dealerHand = new ArrayList<>(2);
+    	ArrayList<Card> playerHand = new ArrayList<>(2);
+    	Card d1 = new Card("Heart",4);
+    	Card d2 = new Card("Heart",5);
+    	Card p1 = new Card("Heart",4);
+    	Card p2 = new Card("Heart",5);
+    	dealerHand.add(d1);
+    	dealerHand.add(d2);
+    	playerHand.add(p1);
+    	playerHand.add(p2);
+    	assertEquals(b.whoWon(dealerHand, playerHand),"Draw","Not a draw");
+    }
+    @Test
+    void whoWonTestTwo() {
+    	BaccaratGameLogic b = new BaccaratGameLogic();
+    	ArrayList<Card> dealerHand = new ArrayList<>(2);
+    	ArrayList<Card> playerHand = new ArrayList<>(2);
+    	Card d1 = new Card("Heart",4);
+    	Card d2 = new Card("Heart",5);
+    	Card p1 = new Card("Heart",13);
+    	Card p2 = new Card("Heart",5);
+    	dealerHand.add(d1);
+    	dealerHand.add(d2);
+    	playerHand.add(p1);
+    	playerHand.add(p2);
+    	assertEquals(b.whoWon(dealerHand, playerHand),"Dealer won","Dealer didnt win");
+    }
+    @Test
+    void whoWonTestThree() {
+    	BaccaratGameLogic b = new BaccaratGameLogic();
+    	ArrayList<Card> dealerHand = new ArrayList<>(2);
+    	ArrayList<Card> playerHand = new ArrayList<>(2);
+    	Card d1 = new Card("Heart",2);
+    	Card d2 = new Card("Heart",5);
+    	Card p1 = new Card("Heart",4);
+    	Card p2 = new Card("Heart",5);
+    	dealerHand.add(d1);
+    	dealerHand.add(d2);
+    	playerHand.add(p1);
+    	playerHand.add(p2);
+    	assertEquals(b.whoWon(dealerHand, playerHand),"Player won","Player didnt win");
+    }
 }
