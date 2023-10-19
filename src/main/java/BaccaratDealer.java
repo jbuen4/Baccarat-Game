@@ -39,7 +39,6 @@ public class BaccaratDealer {
             generateDeck();
             shuffleDeck();
         }
-
         ArrayList<Card> hand = new ArrayList<>(2);
         hand.add(drawOne());
         hand.add(drawOne());

@@ -1,15 +1,40 @@
 import java.util.ArrayList;
 
 public class BaccaratGameLogic {
-
-    public BaccaratGameLogic(){
-
+    private BaccaratDealer theDealer;
+    public BaccaratGameLogic(BaccaratDealer theDealer){
+        this.theDealer = theDealer;
     }
 
     public String whoWon(ArrayList<Card> dealer, ArrayList<Card> player){
+        int dT = handTotal(dealer);
+        int pT = handTotal(player);
+        Card pC = null;
+        Card dC = null;
+
+        if(dT == 9 && pT != 9)
+            return "Banker wins";
+        else if(dT != 9 && pT == 9)
+            return "Player wins";
+        else if(dT == 8 && pT != 8)
+            return "Banker wins";
+        else if(dT != 8 && pT == 8)
+            return "Player wins";
+
+        if(evaluatePlayerDraw(player)) {
+            pC = theDealer.drawOne();
+            player.add(pC);
+            pT = handTotal(player);
+        }
+        if(evaluateBankerDraw(dealer, pC)){
+            dC = theDealer.drawOne();
+            dealer.add(dC);
+            dT = handTotal(dealer);
+        }
+
         //evaluate which hand is closer to a total of 9 and return who won
-        int dealerTotal = handTotal(dealer)-9;
-        int playerTotal = handTotal(player)-9;
+        int dealerTotal = dT-9;
+        int playerTotal = pT-9;
         if(dealerTotal < 0){
             dealerTotal*=-1;
         }
@@ -17,31 +42,28 @@ public class BaccaratGameLogic {
             playerTotal*=-1;
         }
         if (dealerTotal < playerTotal){
-            return "Dealer won";
+            return "Dealer wins";
         }else if(dealerTotal > playerTotal){
-            return "Player won";
+            return "Player wins";
         }
         return "Draw";
     }
 
     //
-    // This method assumes the hand has only 2 cards (not sure if it can have 3
-    // It adds the value of both cards and % 10 since if sum > 10, we remove the
+    // This method works with anysize hand
+    // It adds the value of all the cards and % 10 since if sum > 10, we remove the
     // first digit
     // Ex: cardOne + cardTwo = 12 -> 2 = 12 % 10
     //
     public int handTotal(ArrayList<Card> hand){
-
-        int cardOne = hand.get(0).getValue();
-        if(cardOne > 9)
-            cardOne = 0;
-
-        int cardTwo = hand.get(1).getValue();
-        if(cardTwo > 9)
-            cardTwo = 0;
-
-        int sum = (cardTwo + cardOne) % 10;
-        return sum;
+        int sum = 0;
+        int val;
+        for(Card e : hand){
+            val = e.getValue();
+            if(val < 10)
+                sum += val;
+        }
+        return sum % 10;
     }
 
     //

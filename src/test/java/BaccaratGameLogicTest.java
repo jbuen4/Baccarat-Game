@@ -1,13 +1,20 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 public class BaccaratGameLogicTest {
 
+    public BaccaratDealer dealer;
+    @BeforeEach
+    void setUp() {
+        dealer = new BaccaratDealer();
+    }
     @Test
     void evaluateBankerDrawTestOne(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 3);
         Card b2 = new Card("Suites", 1);
@@ -19,7 +26,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTestTwo(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 2);
         Card b2 = new Card("Suites", 3);
@@ -31,7 +38,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTestThree(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 2);
         Card b2 = new Card("Suites", 2);
@@ -43,7 +50,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTestFour(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 1);
         Card b2 = new Card("Suites", 2);
@@ -55,7 +62,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTestFive(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 1);
         Card b2 = new Card("Suites", 4);
@@ -67,7 +74,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTestSix(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 3);
         Card b2 = new Card("Suites", 3);
@@ -79,7 +86,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTestSeven(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 3);
         Card b2 = new Card("Suites", 3);
@@ -91,7 +98,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTestEight(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 2);
         Card b2 = new Card("Suites", 1);
@@ -103,7 +110,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest9(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 2);
         Card b2 = new Card("Suites", 4);
@@ -114,7 +121,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest10(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 2);
         Card b2 = new Card("Suites", 2);
@@ -126,7 +133,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest11(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 2);
         Card b2 = new Card("Suites", 2);
@@ -138,7 +145,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest12(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 2);
         Card b2 = new Card("Suites", 3);
@@ -150,7 +157,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest13(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 2);
         Card b2 = new Card("Suites", 3);
@@ -162,7 +169,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest14(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 3);
         Card b2 = new Card("Suites", 3);
@@ -174,7 +181,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest15(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 3);
         Card b2 = new Card("Suites", 3);
@@ -186,7 +193,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest16(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 4);
         Card b2 = new Card("Suites", 3);
@@ -198,7 +205,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest17(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 4);
         Card b2 = new Card("Suites", 3);
@@ -210,7 +217,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest18(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 1);
         Card b2 = new Card("Suites", 2);
@@ -222,7 +229,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluateBankerDrawTest19(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 4);
         Card b2 = new Card("Suites", 0);
@@ -234,7 +241,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluatePlayerDrawTestOne(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 3);
         Card b2 = new Card("Suites", 2);
@@ -245,7 +252,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluatePlayerDrawTestTwo(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 0);
         Card b2 = new Card("Suites", 0);
@@ -256,7 +263,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluatePlayerDrawTestThree(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 4);
         Card b2 = new Card("Suites", 2);
@@ -267,7 +274,7 @@ public class BaccaratGameLogicTest {
 
     @Test
     void evaluatePlayerDrawTestFour(){
-        BaccaratGameLogic b = new BaccaratGameLogic();
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
         ArrayList<Card> hand = new ArrayList<>(2);
         Card b1 = new Card("Suites", 5);
         Card b2 = new Card("Suites", 4);
@@ -275,9 +282,10 @@ public class BaccaratGameLogicTest {
         hand.add(b2);
         assertFalse(b.evaluatePlayerDraw(hand), "evaluate player hand is true");
     }
+
     @Test
     void whoWonTestOne() {
-    	BaccaratGameLogic b = new BaccaratGameLogic();
+    	BaccaratGameLogic b = new BaccaratGameLogic(dealer);
     	ArrayList<Card> dealerHand = new ArrayList<>(2);
     	ArrayList<Card> playerHand = new ArrayList<>(2);
     	Card d1 = new Card("Heart",4);
@@ -290,9 +298,10 @@ public class BaccaratGameLogicTest {
     	playerHand.add(p2);
     	assertEquals(b.whoWon(dealerHand, playerHand),"Draw","Not a draw");
     }
+
     @Test
     void whoWonTestTwo() {
-    	BaccaratGameLogic b = new BaccaratGameLogic();
+    	BaccaratGameLogic b = new BaccaratGameLogic(dealer);
     	ArrayList<Card> dealerHand = new ArrayList<>(2);
     	ArrayList<Card> playerHand = new ArrayList<>(2);
     	Card d1 = new Card("Heart",4);
@@ -303,11 +312,12 @@ public class BaccaratGameLogicTest {
     	dealerHand.add(d2);
     	playerHand.add(p1);
     	playerHand.add(p2);
-    	assertEquals(b.whoWon(dealerHand, playerHand),"Dealer won","Dealer didnt win");
+    	assertEquals(b.whoWon(dealerHand, playerHand),"Banker wins","Banker didnt win");
     }
+
     @Test
     void whoWonTestThree() {
-    	BaccaratGameLogic b = new BaccaratGameLogic();
+    	BaccaratGameLogic b = new BaccaratGameLogic(dealer);
     	ArrayList<Card> dealerHand = new ArrayList<>(2);
     	ArrayList<Card> playerHand = new ArrayList<>(2);
     	Card d1 = new Card("Heart",2);
@@ -318,6 +328,6 @@ public class BaccaratGameLogicTest {
     	dealerHand.add(d2);
     	playerHand.add(p1);
     	playerHand.add(p2);
-    	assertEquals(b.whoWon(dealerHand, playerHand),"Player won","Player didnt win");
+    	assertEquals(b.whoWon(dealerHand, playerHand),"Player wins","Player didnt win");
     }
 }
