@@ -8,14 +8,19 @@ public class BaccaratGameLogic {
 
     public String whoWon(ArrayList<Card> dealer, ArrayList<Card> player){
         //evaluate which hand is closer to a total of 9 and return who won
-        if ((handTotal(dealer) -9) < (handTotal(player)-9)){
+        int dealerTotal = handTotal(dealer)-9;
+        int playerTotal = handTotal(player)-9;
+        if(dealerTotal < 0){
+            dealerTotal*=-1;
+        }
+        if(playerTotal < 0){
+            playerTotal*=-1;
+        }
+        if (dealerTotal < playerTotal){
             return "Dealer won";
-        }else if((handTotal(dealer) -9) > (handTotal(player)-9)){
+        }else if(dealerTotal > playerTotal){
             return "Player won";
         }
-
-
-
         return "Draw";
     }
 
@@ -113,7 +118,7 @@ public class BaccaratGameLogic {
         }
     }
 
-    // returns true f the players total is less than 6, false otherwise
+    // returns true if the players total is less than 6, false otherwise
     public boolean evaluatePlayerDraw(ArrayList<Card> hand){
         int total = handTotal(hand);
         return total < 6;
