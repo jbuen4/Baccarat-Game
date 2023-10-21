@@ -21,7 +21,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
-
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 public class BaccaratGame extends Application {
 
 	private ArrayList<Card> playerHand;
@@ -103,6 +104,9 @@ public class BaccaratGame extends Application {
 
 		Button startButton = new Button("Press this button to start the game!");
 		startButton.setPrefSize(330, 150);
+		startButton.setStyle("-fx-background-color: red");
+		Font boldFont = Font.font(startButton.getFont().getFamily(), FontWeight.BOLD, 20);
+		startButton.setFont(boldFont);
 		VBox top = new VBox(menuBar, displayWinnings);
 
 		dealerOpt = new Button("Dealer");
