@@ -52,7 +52,7 @@ public class BaccaratGame extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		primaryStage.setTitle("Welcome to JavaFX");
+		primaryStage.setTitle("Baccarat Game");
 		totalWinnings = 0;
 //		 Rectangle rect = new Rectangle (100, 40, 100, 100);
 //	     rect.setArcHeight(50);
@@ -118,11 +118,17 @@ public class BaccaratGame extends Application {
 		dealerOpt.setDisable(true);
 		playerOpt.setDisable(true);
 		drawOpt.setDisable(true);
+
 		betAmount = new TextField("Enter bet amount: ");
 		betAmount.setDisable(true);
 		betAmount.setPrefSize(200, 40);
+
 		betInstructions = new Text("After placing bet amount, bet by pressing one of the buttons below");
+		Font bF = Font.font(betInstructions.getFont().getFamily(), FontWeight.BOLD, 14);
+		betInstructions.setFont(bF);
 		HBox instruct = new HBox(betInstructions);
+
+
 		HBox bottom = new HBox(instruct, dealerOpt,playerOpt, drawOpt, betAmount);
 		VBox bot = new VBox(instruct, bottom);
 		bot.setSpacing(20);
