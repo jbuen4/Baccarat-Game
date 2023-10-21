@@ -5,6 +5,7 @@ import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -21,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 public class BaccaratGame extends Application {
@@ -31,6 +33,7 @@ public class BaccaratGame extends Application {
 	private BaccaratGameLogic gameLogic;
 	private double currentBet;
 	private double totalWinnings;
+	private String betChoice;
 
 	MenuBar menuBar;
 
@@ -42,7 +45,8 @@ public class BaccaratGame extends Application {
 	Text displayWinnings;
 	Text betInstructions;
 	TextField betAmount;
-
+	EventHandler betHandler;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -84,9 +88,8 @@ public class BaccaratGame extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		
-				
-		
 	}
+
 
 	public Scene createControlScene() {
 
@@ -101,12 +104,14 @@ public class BaccaratGame extends Application {
 		menuBar.getMenus().add(optionsMenu);
 
 		displayWinnings = new Text("Current winnings: $" + totalWinnings);
-
-		Button startButton = new Button("Press this button to start the game!");
+		displayWinnings.setFont(Font.font("arial",30));
+		displayWinnings.setFill(Color.WHITE);
+		Button startButton = new Button("Press this button \nto start the game!");
 		startButton.setPrefSize(330, 150);
 		startButton.setStyle("-fx-background-color: red");
 		Font boldFont = Font.font(startButton.getFont().getFamily(), FontWeight.BOLD, 20);
 		startButton.setFont(boldFont);
+		startButton.setTextFill(Color.WHITE);
 		VBox top = new VBox(menuBar, displayWinnings);
 
 		dealerOpt = new Button("Dealer");
@@ -118,19 +123,26 @@ public class BaccaratGame extends Application {
 		dealerOpt.setDisable(true);
 		playerOpt.setDisable(true);
 		drawOpt.setDisable(true);
-
-		betAmount = new TextField("Enter bet amount: ");
+		dealerOpt.setStyle("-fx-background-color: red");
+		playerOpt.setStyle("-fx-background-color: red");
+		drawOpt.setStyle("-fx-background-color: red");
+		dealerOpt.setTextFill(Color.WHITE);
+		playerOpt.setTextFill(Color.WHITE);
+		drawOpt.setTextFill(Color.WHITE);
+		betAmount = new TextField();
+		betAmount.setPromptText("Enter bet amount");
 		betAmount.setDisable(true);
 		betAmount.setPrefSize(200, 40);
 
-		betInstructions = new Text("After placing bet amount, bet by pressing one of the buttons below");
-		Font bF = Font.font(betInstructions.getFont().getFamily(), FontWeight.BOLD, 14);
+		betInstructions = new Text("After placing bet amount, bet by \npressing one of the buttons below");
+		Font bF = Font.font(betInstructions.getFont().getFamily(), FontWeight.BOLD, 30);
 		betInstructions.setFont(bF);
-		HBox instruct = new HBox(betInstructions);
+		betInstructions.setFill(Color.WHITE);
+		
 
 
-		HBox bottom = new HBox(instruct, dealerOpt,playerOpt, drawOpt, betAmount);
-		VBox bot = new VBox(instruct, bottom);
+		HBox bottom = new HBox(dealerOpt,playerOpt, drawOpt, betAmount);
+		VBox bot = new VBox(bottom);
 		bot.setSpacing(20);
 		bottom.setSpacing(50);
 		top.setSpacing(15);
@@ -139,7 +151,16 @@ public class BaccaratGame extends Application {
 		pane.setCenter(startButton);
 		pane.setStyle("-fx-background-color: darkgreen;");
 
-
+		startButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pane.setCenter(betInstructions);
+                dealerOpt.setDisable(false);
+                playerOpt.setDisable(false);
+                drawOpt.setDisable(false);
+                betAmount.setDisable(false);
+            }
+        });
 		return new Scene(pane, 850, 750);
 	}
 }
