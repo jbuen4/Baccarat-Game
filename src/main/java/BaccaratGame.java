@@ -29,8 +29,8 @@ public class BaccaratGame extends Application {
 
 	private ArrayList<Card> playerHand;
 	private ArrayList<Card> bankerHand;
-	private BaccaratDealer theDealer;
-	private BaccaratGameLogic gameLogic;
+	private BaccaratDealer theDealer = new BaccaratDealer();
+	private BaccaratGameLogic gameLogic = new BaccaratGameLogic(theDealer);
 	private double currentBet;
 	private double totalWinnings;
 	private String betChoice;
@@ -139,6 +139,21 @@ public class BaccaratGame extends Application {
 		betInstructions.setFont(bF);
 		betInstructions.setFill(Color.WHITE);
 		
+		Button dealerCard1 = new Button();
+		dealerCard1.setPrefSize(100,150);
+		Button dealerCard2 = new Button();
+		dealerCard2.setPrefSize(100,150);
+		Button dealerCard3 = new Button();
+		dealerCard3.setPrefSize(100, 150);
+		Button playerCard1 = new Button();
+		playerCard1.setPrefSize(100,150);
+		Button playerCard2 = new Button();
+		playerCard2.setPrefSize(100,150);
+		Button playerCard3 = new Button();
+		playerCard3.setPrefSize(100,150);
+		HBox dealersHand = new HBox(20,dealerCard1,dealerCard2,dealerCard3);
+		HBox playersHand = new HBox(20,playerCard1,playerCard2,playerCard3);
+		HBox hands = new HBox(50,dealersHand,playersHand);
 
 
 		HBox bottom = new HBox(dealerOpt,playerOpt, drawOpt, betAmount);
@@ -161,6 +176,29 @@ public class BaccaratGame extends Application {
                 betAmount.setDisable(false);
             }
         });
+		betHandler = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				double currentBet = Double.parseDouble(betAmount.getText());
+				betChoice = ((Button)event.getSource()).getText();
+				drawOpt.setDisable(true);
+				playerOpt.setDisable(true);
+				dealerOpt.setDisable(true);
+				betAmount.setEditable(false);
+				bankerHand = theDealer.dealHand();
+				playerHand = theDealer.dealHand();
+				dealerCard3.setVisible(false);
+				playerCard3.setVisible(false);
+				dealerCard1.setText(bankerHand.get(0).getValue() + " of " + bankerHand.get(0).getSuite());
+				dealerCard2.setText(bankerHand.get(1).getValue() + " of " + bankerHand.get(1).getSuite());
+				playerCard1.setText(playerHand.get(0).getValue() + " of " + playerHand.get(0).getSuite());
+				playerCard2.setText(playerHand.get(1).getValue() + " of " + playerHand.get(1).getSuite());
+				pane.setCenter(hands);
+			}
+		};
+		drawOpt.setOnAction(betHandler);
+		playerOpt.setOnAction(betHandler);
+		dealerOpt.setOnAction(betHandler);
 		return new Scene(pane, 850, 750);
 	}
 }
