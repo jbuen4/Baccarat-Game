@@ -33,16 +33,16 @@ public class BaccaratGameLogic {
         }
 
         //evaluate which hand is closer to a total of 9 and return who won
-        int dealerTotal = dT-9;
-        int playerTotal = pT-9;
-        if(dealerTotal < 0){
-            dealerTotal*=-1;
-        }
-        if(playerTotal < 0){
-            playerTotal*=-1;
-        }
+        int dealerTotal = 9-dT;
+        int playerTotal = 9-pT;
+//        if(dealerTotal < 0){
+//            dealerTotal*=-1;
+//        }
+//        if(playerTotal < 0){
+//            playerTotal*=-1;
+//        }
         if (dealerTotal < playerTotal){
-            return "Dealer wins";
+            return "Banker wins";
         }else if(dealerTotal > playerTotal){
             return "Player wins";
         }
@@ -50,7 +50,7 @@ public class BaccaratGameLogic {
     }
 
     //
-    // This method works with anysize hand
+    // This method works with any size hand
     // It adds the value of all the cards and % 10 since if sum > 10, we remove the
     // first digit
     // Ex: cardOne + cardTwo = 12 -> 2 = 12 % 10

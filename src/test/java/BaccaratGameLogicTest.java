@@ -239,6 +239,18 @@ public class BaccaratGameLogicTest {
         assertFalse(b.evaluateBankerDraw(hand, p), "evaluate banker hand is true");
     }
 
+//    @Test
+//    void evaluateBankerDrawTest20(){
+//        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
+//        ArrayList<Card> hand = new ArrayList<>(2);
+//        Card b1 = new Card("Suites", 4);
+//        Card b2 = new Card("Suites", 8);
+//        hand.add(b1);
+//        hand.add(b2);
+//        Card p = new Card("Suites", 9);
+//        assertTrue(b.evaluateBankerDraw(hand, p), "evaluate banker hand is false");
+//    }
+
     @Test
     void evaluatePlayerDrawTestOne(){
         BaccaratGameLogic b = new BaccaratGameLogic(dealer);
@@ -281,6 +293,17 @@ public class BaccaratGameLogicTest {
         hand.add(b1);
         hand.add(b2);
         assertFalse(b.evaluatePlayerDraw(hand), "evaluate player hand is true");
+    }
+
+    @Test
+    void evaluatePlayerDrawTestFive(){
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
+        ArrayList<Card> hand = new ArrayList<>(2);
+        Card b1 = new Card("Suites", 1);
+        Card b2 = new Card("Suites", 9);
+        hand.add(b1);
+        hand.add(b2);
+        assertTrue(b.evaluatePlayerDraw(hand), "evaluate player hand is false");
     }
 
     @Test
