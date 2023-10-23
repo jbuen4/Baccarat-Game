@@ -49,7 +49,7 @@ public class BaccaratGame extends Application {
 	MenuItem freshStart;
 	Button dealerOpt, playerOpt, drawOpt, startButton, dealerCard1, dealerCard2, dealerCard3, playerCard1, playerCard2, playerCard3, deal;
 
-	Text displayWinnings, betInstructions, displayResult, whoIsWho;
+	Text displayWinnings, betInstructions, displayResult, whoIsWho, choiceBet;
 	TextField betAmount;
 	EventHandler betHandler;
 	
@@ -144,9 +144,8 @@ public class BaccaratGame extends Application {
 					deal.setDisable(true);
 					displayWinnings.setText("Current winnings: $" + totalWinnings);
 					displayResult.setVisible(true);
-//					displayResult.setDisable(true);
-//					Font bF = Font.font(betInstructions.getFont().getFamily(), FontWeight.BOLD, 30);
 					displayResult.setFont(bF);
+
 				}
 			}
 
@@ -259,10 +258,15 @@ public class BaccaratGame extends Application {
 				}
 
 				displayResult = new Text("Result: " + result);
+
+
 				whoIsWho = new Text("Banker\t\t\t\t\t\t\t\t\t\t\tPlayer");
+				choiceBet = new Text("You bet on " + betChoice);
+
 				Font boldFont = Font.font(startButton.getFont().getFamily(), FontWeight.BOLD, 20);
 				whoIsWho.setFont(boldFont);
-				VBox center = new VBox(whoIsWho, hands, displayResult);
+				choiceBet.setFont(boldFont);
+				VBox center = new VBox(whoIsWho, hands, choiceBet, displayResult);
 				center.setSpacing(50);
 				displayResult.setVisible(false);
 				pane.setCenter(center);
