@@ -20,9 +20,9 @@ public class BaccaratGameLogic {
             playerTotal*=-1;
         }
         if (dealerTotal < playerTotal){
-            return "Dealer wins";
+            return "Dealer";
         }else if(dealerTotal > playerTotal){
-            return "Player wins";
+            return "Player";
         }
         return "Draw";
     }
@@ -124,13 +124,13 @@ public class BaccaratGameLogic {
         Card dC = null;
 
         if(dT == 9 && pT != 9)
-            return "Banker wins";
+            return "Banker";
         else if(dT != 9 && pT == 9)
-            return "Player wins";
+            return "Player";
         else if(dT == 8 && pT != 8)
-            return "Banker wins";
+            return "Banker";
         else if(dT != 8 && pT == 8)
-            return "Player wins";
+            return "Player";
 
         if(evaluatePlayerDraw(player)) {
             pC = theDealer.drawOne();
