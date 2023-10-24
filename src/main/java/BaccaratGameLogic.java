@@ -9,40 +9,18 @@ public class BaccaratGameLogic {
     public String whoWon(ArrayList<Card> dealer, ArrayList<Card> player){
         int dT = handTotal(dealer);
         int pT = handTotal(player);
-        Card pC = null;
-        Card dC = null;
-
-        if(dT == 9 && pT != 9)
-            return "Banker wins";
-        else if(dT != 9 && pT == 9)
-            return "Player wins";
-        else if(dT == 8 && pT != 8)
-            return "Banker wins";
-        else if(dT != 8 && pT == 8)
-            return "Player wins";
-
-        if(evaluatePlayerDraw(player)) {
-            pC = theDealer.drawOne();
-            player.add(pC);
-            pT = handTotal(player);
-        }
-        if(evaluateBankerDraw(dealer, pC)){
-            dC = theDealer.drawOne();
-            dealer.add(dC);
-            dT = handTotal(dealer);
-        }
 
         //evaluate which hand is closer to a total of 9 and return who won
-        int dealerTotal = 9-dT;
-        int playerTotal = 9-pT;
-//        if(dealerTotal < 0){
-//            dealerTotal*=-1;
-//        }
-//        if(playerTotal < 0){
-//            playerTotal*=-1;
-//        }
+        int dealerTotal = dT-9;
+        int playerTotal = pT-9;
+        if(dealerTotal < 0){
+            dealerTotal*=-1;
+        }
+        if(playerTotal < 0){
+            playerTotal*=-1;
+        }
         if (dealerTotal < playerTotal){
-            return "Banker wins";
+            return "Dealer wins";
         }else if(dealerTotal > playerTotal){
             return "Player wins";
         }
@@ -50,7 +28,7 @@ public class BaccaratGameLogic {
     }
 
     //
-    // This method works with any size hand
+    // This method works with anysize hand
     // It adds the value of all the cards and % 10 since if sum > 10, we remove the
     // first digit
     // Ex: cardOne + cardTwo = 12 -> 2 = 12 % 10
@@ -138,6 +116,33 @@ public class BaccaratGameLogic {
                 }
                 return false;
         }
+    }
+    public String evaluateNaturalWin(ArrayList<Card> dealer,ArrayList<Card>player) {
+    	int dT = handTotal(dealer);
+        int pT = handTotal(player);
+        Card pC = null;
+        Card dC = null;
+
+        if(dT == 9 && pT != 9)
+            return "Banker wins";
+        else if(dT != 9 && pT == 9)
+            return "Player wins";
+        else if(dT == 8 && pT != 8)
+            return "Banker wins";
+        else if(dT != 8 && pT == 8)
+            return "Player wins";
+
+        if(evaluatePlayerDraw(player)) {
+            pC = theDealer.drawOne();
+            player.add(pC);
+            pT = handTotal(player);
+        }
+        if(evaluateBankerDraw(dealer, pC)){
+            dC = theDealer.drawOne();
+            dealer.add(dC);
+            dT = handTotal(dealer);
+        }
+        return null;
     }
 
     // returns true if the players total is less than 6, false otherwise
