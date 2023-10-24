@@ -211,15 +211,18 @@ public class BaccaratGame extends Application {
 				bothHands = new ArrayList<>();
 				index = 0;
 
+				bothHands.add(playerCard1);
 				bothHands.add(dealerCard1);
+				bothHands.add(playerCard2);
 				bothHands.add(dealerCard2);
+				if(playerHand.size() == 3)
+					bothHands.add(playerCard3);
 				if(bankerHand.size() == 3)
 					bothHands.add(dealerCard3);
 
-				bothHands.add(playerCard1);
-				bothHands.add(playerCard2);
-				if(playerHand.size() == 3)
-					bothHands.add(playerCard3);
+
+
+
 
 				bothHandsLength = bothHands.size();
 
