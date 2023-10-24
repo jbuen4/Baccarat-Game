@@ -47,7 +47,7 @@ public class BaccaratGame extends Application {
 	Menu optionsMenu;
 	MenuItem exit;
 	MenuItem freshStart;
-	Button dealerOpt, playerOpt, drawOpt, startButton, dealerCard1, dealerCard2, dealerCard3, playerCard1, playerCard2, playerCard3, deal;
+	Button dealerOpt, playerOpt, drawOpt, startButton, dealerCard1, dealerCard2, dealerCard3, playerCard1, playerCard2, playerCard3, deal, playAgain;
 
 	Text displayWinnings, betInstructions, displayResult, whoIsWho, choiceBet;
 	TextField betAmount;
@@ -62,7 +62,7 @@ public class BaccaratGame extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		primaryStage.setTitle("Baccarat Game");
-		totalWinnings = 0;
+		totalWinnings = 1000;
 
 		menuBar = new MenuBar();
 		optionsMenu = new Menu("Options");
@@ -110,7 +110,11 @@ public class BaccaratGame extends Application {
 		Font bF = Font.font(betInstructions.getFont().getFamily(), FontWeight.BOLD, 30);
 		betInstructions.setFont(bF);
 		betInstructions.setFill(Color.WHITE);
-
+		playAgain = new Button("Play again");
+		playAgain.setFont(boldFont);
+		playAgain.setTextFill(Color.WHITE);
+		playAgain.setDisable(true);
+		playAgain.setStyle("-fx-background-color: red");
 		dealerCard1 = new Button();
 		dealerCard1.setPrefSize(100,150);
 		 dealerCard2 = new Button();
@@ -145,6 +149,7 @@ public class BaccaratGame extends Application {
 					displayWinnings.setText("Current winnings: $" + totalWinnings);
 					displayResult.setVisible(true);
 					displayResult.setFont(bF);
+					playAgain.setDisable(false);
 
 				}
 			}
@@ -181,7 +186,6 @@ public class BaccaratGame extends Application {
 		pane.setBottom(bot);
 		pane.setCenter(startButton);
 		pane.setStyle("-fx-background-color: darkgreen;");
-
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -206,58 +210,98 @@ public class BaccaratGame extends Application {
 				betAmount.setDisable(true);
 				bankerHand = theDealer.dealHand();
 				playerHand = theDealer.dealHand();
-				result = gameLogic.whoWon(bankerHand, playerHand);
+				result = gameLogic.evaluateNaturalWin(bankerHand, playerHand);
+				if(result != null) {
+					bothHands = new ArrayList<>();
+					index = 0;
 
-				bothHands = new ArrayList<>();
-				index = 0;
+					bothHands.add(playerCard1);
+					bothHands.add(dealerCard1);
+					bothHands.add(playerCard2);
+					bothHands.add(dealerCard2);
 
-				bothHands.add(playerCard1);
-				bothHands.add(dealerCard1);
-				bothHands.add(playerCard2);
-				bothHands.add(dealerCard2);
-				if(playerHand.size() == 3)
-					bothHands.add(playerCard3);
-				if(bankerHand.size() == 3)
-					bothHands.add(dealerCard3);
+					bothHandsLength = bothHands.size();
+					dealerCard1.setVisible(false);
+					dealerCard2.setVisible(false);
+					dealerCard3.setVisible(false);
+
+					playerCard1.setVisible(false);
+					playerCard2.setVisible(false);
+					playerCard3.setVisible(false);
+
+					dealerCard1.setText(bankerHand.get(0).getValue() + " of " + bankerHand.get(0).getSuite());
+					dealerCard2.setText(bankerHand.get(1).getValue() + " of " + bankerHand.get(1).getSuite());
+					playerCard1.setText(playerHand.get(0).getValue() + " of " + playerHand.get(0).getSuite());
+					playerCard2.setText(playerHand.get(1).getValue() + " of " + playerHand.get(1).getSuite());
+
+					if(result.equals(betChoice)){
+						totalWinnings = totalWinnings + (currentBet * .95) ;
+					}
+					else if(result.equals(betChoice)){
+						totalWinnings = totalWinnings + currentBet;
+					}
+					else if(result.equals(betChoice)){
+
+					}
+					else{
+						totalWinnings = totalWinnings - currentBet;
+						if(totalWinnings < 0)
+							totalWinnings = 0;
+					}
+				}else {
+
+					bothHands = new ArrayList<>();
+					index = 0;
+
+					bothHands.add(playerCard1);
+					bothHands.add(dealerCard1);
+					bothHands.add(playerCard2);
+					bothHands.add(dealerCard2);
+					if(playerHand.size() == 3)
+						bothHands.add(playerCard3);
+					if(bankerHand.size() == 3)
+						bothHands.add(dealerCard3);
 
 
 
 
 
-				bothHandsLength = bothHands.size();
+					bothHandsLength = bothHands.size();
 
-				dealerCard1.setVisible(false);
-				dealerCard2.setVisible(false);
-				dealerCard3.setVisible(false);
+					dealerCard1.setVisible(false);
+					dealerCard2.setVisible(false);
+					dealerCard3.setVisible(false);
 
-				playerCard1.setVisible(false);
-				playerCard2.setVisible(false);
-				playerCard3.setVisible(false);
+					playerCard1.setVisible(false);
+					playerCard2.setVisible(false);
+					playerCard3.setVisible(false);
 
-				dealerCard1.setText(bankerHand.get(0).getValue() + " of " + bankerHand.get(0).getSuite());
-				dealerCard2.setText(bankerHand.get(1).getValue() + " of " + bankerHand.get(1).getSuite());
-				playerCard1.setText(playerHand.get(0).getValue() + " of " + playerHand.get(0).getSuite());
-				playerCard2.setText(playerHand.get(1).getValue() + " of " + playerHand.get(1).getSuite());
+					dealerCard1.setText(bankerHand.get(0).getValue() + " of " + bankerHand.get(0).getSuite());
+					dealerCard2.setText(bankerHand.get(1).getValue() + " of " + bankerHand.get(1).getSuite());
+					playerCard1.setText(playerHand.get(0).getValue() + " of " + playerHand.get(0).getSuite());
+					playerCard2.setText(playerHand.get(1).getValue() + " of " + playerHand.get(1).getSuite());
 
-				if(playerHand.size() == 3)
-					playerCard3.setText(playerHand.get(2).getValue() + " of " + playerHand.get(2).getSuite());
-				if(bankerHand.size() == 3)
-					dealerCard3.setText(bankerHand.get(2).getValue() + " of " + bankerHand.get(2).getSuite());
+					if(playerHand.size() == 3)
+						playerCard3.setText(playerHand.get(2).getValue() + " of " + playerHand.get(2).getSuite());
+					if(bankerHand.size() == 3)
+						dealerCard3.setText(bankerHand.get(2).getValue() + " of " + bankerHand.get(2).getSuite());
 
+					result = gameLogic.whoWon(bankerHand, playerHand);
+				
+					if(result.equals(betChoice)){
+						totalWinnings = totalWinnings + (currentBet * .95) ;
+					}
+					else if(result.equals(betChoice)){
+						totalWinnings = totalWinnings + currentBet;
+					}
+					else if(result.equals(betChoice)){
 
-				if(result.equals("Banker wins") && betChoice.equals("Banker")){
-					totalWinnings = totalWinnings + (currentBet * .95) ;
-				}
-				else if(result.equals("Player wins") && betChoice.equals("Player")){
-					totalWinnings = totalWinnings + currentBet;
-				}
-				else if(result.equals("Draw") && betChoice.equals("Draw")){
-
-				}
-				else{
-					totalWinnings = totalWinnings - currentBet;
-					if(totalWinnings < 0)
-						totalWinnings = 0;
+					}
+					else{
+						totalWinnings = totalWinnings - currentBet;
+						if(totalWinnings < 0)
+							totalWinnings = 0;
+					}
 				}
 
 				displayResult = new Text("Result: " + result);
@@ -269,13 +313,32 @@ public class BaccaratGame extends Application {
 				Font boldFont = Font.font(startButton.getFont().getFamily(), FontWeight.BOLD, 20);
 				whoIsWho.setFont(boldFont);
 				choiceBet.setFont(boldFont);
-				VBox center = new VBox(whoIsWho, hands, choiceBet, displayResult);
+				choiceBet.setFill(Color.WHITE);
+				whoIsWho.setFill(Color.WHITE);
+				displayResult.setFill(Color.WHITE);
+				VBox results = new VBox(100,choiceBet,displayResult);
+				VBox center = new VBox(whoIsWho, hands, results);
 				center.setSpacing(50);
 				displayResult.setVisible(false);
 				pane.setCenter(center);
+				pane.setRight(playAgain);
+				pane.setAlignment(playAgain, Pos.CENTER);
 			}
 		};
-
+		playAgain.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pane.setCenter(betInstructions);
+                dealerOpt.setDisable(false);
+                playerOpt.setDisable(false);
+                drawOpt.setDisable(false);
+                betAmount.clear();
+                betAmount.setDisable(false);
+                deal.setDisable(true);
+                playAgain.setDisable(true);
+                pane.setRight(null);
+            }
+        });
 
 		drawOpt.setOnAction(betHandler);
 		playerOpt.setOnAction(betHandler);
