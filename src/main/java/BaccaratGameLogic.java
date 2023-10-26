@@ -10,17 +10,49 @@ public class BaccaratGameLogic {
         int dT = handTotal(dealer);
         int pT = handTotal(player);
 
+
+        if(dT == 9 && pT != 9)
+            return "Banker";
+        else if(dT != 9 && pT == 9)
+            return "Player";
+        else if(dT == 8 && pT != 8)
+            return "Banker";
+        else if(dT != 8 && pT == 8)
+            return "Player";
+
+        Card pC = null;
+        Card dC = null;
+
+
+        if(evaluatePlayerDraw(player)) {
+            pC = theDealer.drawOne();
+            player.add(pC);
+            pT = handTotal(player);
+        }
+        if(evaluateBankerDraw(dealer, pC)){
+            dC = theDealer.drawOne();
+            dealer.add(dC);
+            dT = handTotal(dealer);
+        }
+
+
         //evaluate which hand is closer to a total of 9 and return who won
-        int dealerTotal = dT-9;
-        int playerTotal = pT-9;
-        if(dealerTotal < 0){
-            dealerTotal*=-1;
+        int dealerTotal = 9-dT;
+        int playerTotal = 9-pT;
+
+        for(Card e : player){
+            System.out.print(e.getValue() + " ");
         }
-        if(playerTotal < 0){
-            playerTotal*=-1;
+        System.out.println();
+        for(Card e : dealer){
+            System.out.print(e.getValue() + " ");
         }
+        System.out.println();
+
+        System.out.println("9 - dT = " + dealerTotal);
+        System.out.println("9 - pT = " + playerTotal);
         if (dealerTotal < playerTotal){
-            return "Dealer";
+            return "Banker";
         }else if(dealerTotal > playerTotal){
             return "Player";
         }
@@ -28,7 +60,7 @@ public class BaccaratGameLogic {
     }
 
     //
-    // This method works with anysize hand
+    // This method works with any size hand
     // It adds the value of all the cards and % 10 since if sum > 10, we remove the
     // first digit
     // Ex: cardOne + cardTwo = 12 -> 2 = 12 % 10
@@ -41,7 +73,8 @@ public class BaccaratGameLogic {
             if(val < 10)
                 sum += val;
         }
-        return sum % 10;
+//        System.out.println(sum%10);
+        return (sum % 10);
     }
 
     //
@@ -120,8 +153,7 @@ public class BaccaratGameLogic {
     public String evaluateNaturalWin(ArrayList<Card> dealer,ArrayList<Card>player) {
     	int dT = handTotal(dealer);
         int pT = handTotal(player);
-        Card pC = null;
-        Card dC = null;
+
 
         if(dT == 9 && pT != 9)
             return "Banker";
@@ -131,17 +163,6 @@ public class BaccaratGameLogic {
             return "Banker";
         else if(dT != 8 && pT == 8)
             return "Player";
-
-        if(evaluatePlayerDraw(player)) {
-            pC = theDealer.drawOne();
-            player.add(pC);
-            pT = handTotal(player);
-        }
-        if(evaluateBankerDraw(dealer, pC)){
-            dC = theDealer.drawOne();
-            dealer.add(dC);
-            dT = handTotal(dealer);
-        }
         return null;
     }
 

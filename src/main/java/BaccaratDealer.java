@@ -49,6 +49,10 @@ public class BaccaratDealer {
     // Draws and removes 1 card from the front of deck
     //
     public Card drawOne(){
+        if(sizeOfDeck < 1){
+            generateDeck();
+            shuffleDeck();
+        }
         Card draw = deck.get(0);
         deck.remove(0);
         sizeOfDeck--;

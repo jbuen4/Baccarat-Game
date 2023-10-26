@@ -335,7 +335,7 @@ public class BaccaratGameLogicTest {
     	dealerHand.add(d2);
     	playerHand.add(p1);
     	playerHand.add(p2);
-    	assertEquals(b.whoWon(dealerHand, playerHand),"Banker wins","Banker didnt win");
+    	assertEquals(b.whoWon(dealerHand, playerHand),"Banker","Banker didnt win");
     }
 
     @Test
@@ -351,6 +351,29 @@ public class BaccaratGameLogicTest {
     	dealerHand.add(d2);
     	playerHand.add(p1);
     	playerHand.add(p2);
-    	assertEquals(b.whoWon(dealerHand, playerHand),"Player wins","Player didnt win");
+    	assertEquals(b.whoWon(dealerHand, playerHand),"Player","Player didnt win");
+    }
+
+    @Test
+    void whoWonTestFour() {
+        BaccaratGameLogic b = new BaccaratGameLogic(dealer);
+        ArrayList<Card> dealerHand = new ArrayList<>(2);
+        ArrayList<Card> playerHand = new ArrayList<>(2);
+        Card d1 = new Card("Heart",4);
+        Card d2 = new Card("Heart",5);
+//        Card d3 = new Card("Heart",10);
+
+        Card p1 = new Card("Heart",6);
+        Card p2 = new Card("Heart",3);
+//        Card p3 = new Card("Heart",10);
+        dealerHand.add(d1);
+        dealerHand.add(d2);
+//        dealerHand.add(d3);
+        playerHand.add(p1);
+        playerHand.add(p2);
+//        playerHand.add(p3);
+        System.out.println(b.handTotal(dealerHand));
+        System.out.println(b.handTotal(playerHand));
+        assertEquals("Draw", b.whoWon(dealerHand, playerHand),"not a draw");
     }
 }
